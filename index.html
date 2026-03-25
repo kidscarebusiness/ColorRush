@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#121212">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icon-192.png">
+    <title>Color Rush</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="app-shell">
+        <section id="splash-screen" class="screen splash-screen active" aria-label="Splash screen">
+            <div class="splash-mark" aria-hidden="true">
+                <span class="mark-tile red"></span>
+                <span class="mark-tile blue"></span>
+                <span class="mark-tile green"></span>
+                <span class="mark-tile yellow"></span>
+            </div>
+            <p class="eyebrow">Reflex Arcade</p>
+            <h1 class="game-title">Color Rush</h1>
+            <p class="tagline">Tap the right color before the clock runs out.</p>
+        </section>
+
+        <main id="menu-screen" class="screen menu-screen" hidden>
+            <header class="screen-topbar menu-topbar">
+                <span class="topbar-spacer" aria-hidden="true"></span>
+                <button id="menu-settings-button" class="icon-button" type="button" aria-label="Open settings">&#9881;</button>
+            </header>
+
+            <header class="hero-card">
+                <p class="eyebrow">Fast. Bright. Unforgiving.</p>
+                <div class="splash-mark hero-mark" aria-hidden="true">
+                    <span class="mark-tile red"></span>
+                    <span class="mark-tile blue"></span>
+                    <span class="mark-tile green"></span>
+                    <span class="mark-tile yellow"></span>
+                </div>
+                <h1 class="game-title">Color Rush</h1>
+                <p class="tagline">Build your streak, survive the countdown, and beat your best score.</p>
+                <button id="play-button" class="primary-button hero-button">Play</button>
+            </header>
+
+            <section class="top-stats compact-stats" aria-label="Best stats">
+                <article class="stat-card compact">
+                    <span class="stat-label">Best Score</span>
+                    <strong id="menu-best-score" class="stat-value compact-value">0</strong>
+                </article>
+                <article class="stat-card compact">
+                    <span class="stat-label">Top Level</span>
+                    <strong id="menu-best-level" class="stat-value compact-value">1</strong>
+                </article>
+            </section>
+        </main>
+
+        <main id="game-screen" class="screen game-screen" hidden>
+            <header class="screen-topbar game-topbar">
+                <button id="back-button" class="icon-button back-button" type="button" aria-label="Go back">&larr;</button>
+                <button id="game-settings-button" class="icon-button" type="button" aria-label="Open settings">&#9881;</button>
+            </header>
+
+            <header class="hud">
+                <article class="stat-card">
+                    <span class="stat-label">Score</span>
+                    <strong id="score-label" class="stat-value">0</strong>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-label">Best</span>
+                    <strong id="best-score-label" class="stat-value">0</strong>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-label">Level</span>
+                    <strong id="level-label" class="stat-value">1</strong>
+                </article>
+                <article class="stat-card timer-card">
+                    <span class="stat-label">Time Left</span>
+                    <strong id="time-left-label" class="stat-value">5</strong>
+                </article>
+            </header>
+
+            <section class="arena-card">
+                <div class="instruction-wrap">
+                    <p id="instruction-label" class="instruction-label">Tap Red</p>
+                    <p id="status-label" class="status-label" aria-live="polite">Ready?</p>
+                </div>
+
+                <div class="color-grid" role="group" aria-label="Color buttons">
+                    <button id="red-button" class="color-button red" data-color="Red">Red</button>
+                    <button id="blue-button" class="color-button blue" data-color="Blue">Blue</button>
+                    <button id="green-button" class="color-button green" data-color="Green">Green</button>
+                    <button id="yellow-button" class="color-button yellow" data-color="Yellow">Yellow</button>
+                </div>
+
+                <button id="play-again-button" class="secondary-button" hidden>Play Again</button>
+            </section>
+        </main>
+
+        <section id="settings-modal" class="settings-modal" hidden aria-labelledby="settings-title" aria-modal="true" role="dialog">
+            <div id="settings-backdrop" class="settings-backdrop"></div>
+            <div class="settings-panel">
+                <header class="settings-header">
+                    <div>
+                        <p class="eyebrow">Preferences</p>
+                        <h2 id="settings-title" class="settings-title">Settings</h2>
+                    </div>
+                    <button id="close-settings-button" class="icon-button close-button" type="button" aria-label="Close settings">&#10005;</button>
+                </header>
+
+                <div class="panel toggles-panel" aria-label="Audio and theme settings">
+                    <label class="toggle-card" for="music-toggle">
+                        <span class="toggle-copy">
+                            <strong>Music</strong>
+                            <small>Ambient pulse during gameplay</small>
+                        </span>
+                        <span class="toggle-switch">
+                            <input id="music-toggle" class="toggle-input" type="checkbox" checked>
+                            <span class="toggle-slider" aria-hidden="true"></span>
+                        </span>
+                    </label>
+                    <label class="toggle-card" for="sound-toggle">
+                        <span class="toggle-copy">
+                            <strong>Sound</strong>
+                            <small>Correct and wrong tap feedback</small>
+                        </span>
+                        <span class="toggle-switch">
+                            <input id="sound-toggle" class="toggle-input" type="checkbox" checked>
+                            <span class="toggle-slider" aria-hidden="true"></span>
+                        </span>
+                    </label>
+                    <label class="toggle-card" for="theme-toggle">
+                        <span class="toggle-copy">
+                            <strong>Dark / White Mode</strong>
+                            <small>Switch between deep and bright themes</small>
+                        </span>
+                        <span class="toggle-switch">
+                            <input id="theme-toggle" class="toggle-input" type="checkbox" checked>
+                            <span class="toggle-slider" aria-hidden="true"></span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
